@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regex Test</title>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+		*{
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+			font-family: 'Staatliches', cursive;
+		}
+		html{
+			font-size: 20px;
+		}
+		.sec{
+			margin-top: 20px;
+			text-align: center;
+		}
+		input{
+			margin-bottom: 20px;
+			padding-left: 5px;
+			font-size: 1rem;
+			border: 2px solid rgb(228, 245, 0);
+			border-radius: 5px;
+			outline: none;
+			transition: border .2s ease-out;
+		}
+		input:focus{
+			border-bottom: 4px solid rgb(255, 166, 0);
+		}
+		h1{
+			text-align: center;
+			font-size: 2.5rem;
+			letter-spacing: .2ch;
+			text-shadow: 1px -3px 1px rgb(255 166 0);
+		}
+		p{
+			font-size: 1.2rem;
+		}
+		.incorrect{
+			box-shadow: 1px 1px 10px red;
+			border: 2px solid red;
+		}
+		.correct{
+			box-shadow: 1px 1px 1px 2px rgb(238, 255, 0);
+			border: 2px solid rgb(228, 245, 0);
+		}
+	</style>
+</head>
+<body>
+	<h1>Regex_Tester</h1>
+	<div class="sec">
+		<p>User name:</p>
+		<input type="text" placeholder="Username@Name" id="name" onkeyup="test(id)"/>
+		<p>Password:</p>
+		<input type="password" placeholder="8-15 char password" id="password" onkeyup="test(id)"/>
+		<p>Phone:</p>
+		<input type="tel" placeholder="054-21-12345678" id="tel" onkeyup="test(id)"/>
+		<p>E-mail:</p>
+		<input type="email" placeholder="email@domain.com" id="email" onkeyup="test(id)"/>
+	</div>
+	<script>
+		const tests = { //Regex patterns
+			name: 		/^.+@.+$/,
+			password: 	/^[\d\w]{8,15}$/,
+			tel:    	/^[\d]{3}(-|\s)[\d]{2}(-|\s)[\d]{8}$/,
+			email: 		/^.+@\w+\.\w+(\.[\w]{2})?$/
+		}
+
+		function test(id){
+			let input = document.querySelector("#" + id);
+			if (tests[id].test(input.value)){
+				input.className = "correct";
+			}else{
+				input.className = "incorrect";
+			}
+		}
+	</script>
+</body>
+</html>
